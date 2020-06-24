@@ -1,3 +1,5 @@
+#
+.terraformignore
 # Local .terraform directories
 **/.terraform/*
 
