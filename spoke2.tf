@@ -1,5 +1,5 @@
 locals {
-  spoke2-location       = "WestUS"
+  spoke2-location       = "EastUS"
   spoke2-resource-group = "spoke2-vnet-rg"
   prefix-spoke2         = "spoke2"
 }
