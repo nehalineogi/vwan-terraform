@@ -5,6 +5,7 @@
 
 ## Architecture diagram
 
+![alt text for image](images/vwan-hld.JPG)
 
 ## Getting Started
 
@@ -14,14 +15,12 @@
 This code sample will build the above architecture
 
 ### Prerequisites
-
-
+git
+terraform
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+git clone the repository and run the following commands
 
 ```
 terraform init
@@ -31,35 +30,26 @@ terraform destroy
 ```
 
 
+
 ## Running the tests
 
+End Users need to Install the mydomain.com.pfx certificate in the local certificate store
+Download and install the VPN Client from Azure Portal
 
+After the p2s client is connected:
+ipconfig (should get an ip from the P2S subnets 192.168.51.0/24 or 192.168.52.0.24)
 
-### Break down into end to end tests
-
-
-
-### And coding style tests
-
-
-## Deployment
-
-
-
-## Built With
-
-
-## Contributing
-
-
-## Versioning
+```
+ping 10.1.1.4
+ping 10.2.1.4
+ping 10.3.1.4
+ping 10.4.1.4
+```
 
 
 ## Contributors
 
 Many thanks to Shaun Croucher for his contributions.
-
-## License
 
 
 ## Acknowledgments
