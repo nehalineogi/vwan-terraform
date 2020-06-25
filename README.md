@@ -15,26 +15,29 @@
 This code sample will build the above architecture
 
 ### Prerequisites
+
 ```
 git
 terraform
 ```
+
 ### Installing
 
 git clone the repository and run the following commands
 
 ```
+# setup
 terraform init
 terraform plan
 terraform apply
+# to cleanup
 terraform destroy
 ```
-
-
 
 ## Running the tests
 
 End Users need to
+
 - Install the mydomain.com.pfx certificate in the local certificate store.
 - Download and install the VPN Client from Azure Portal
 
@@ -55,5 +58,3 @@ Many thanks to Shaun Croucher for his contributions.
 
 
 ## Acknowledgments
-
-
