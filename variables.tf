@@ -1,7 +1,8 @@
-variable "location" {
+/*variable "location" {
   description = "Location of the network"
   default     = "centralus"
 }
+*/
 
 variable "username" {
   description = "Username for Virtual Machines"

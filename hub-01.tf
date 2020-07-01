@@ -1,13 +1,13 @@
 
 locals {
   prefix-hub-01         = "hub-01"
-  hub-01-location       = "EastUS"
-  hub-01-resource-group = "vwan-rg"
-  shared-key         = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  hub-01-location       = "eastus2"
+  
 }
 resource "azurerm_virtual_hub" "hub-01" {
-  name                = "${local.prefix-hub-01}-${local.hub-location}"
-  resource_group_name = "${local.hub-01-resource-group}"
+  name                = "${local.prefix-hub-01}-${local.hub-01-location}"
+ // resource_group_name = "${local.hub-01-resource-group}"
+  resource_group_name = azurerm_virtual_wan.vwan.resource_group_name
   location            = "${local.hub-01-location}"
   virtual_wan_id      = azurerm_virtual_wan.vwan.id
   address_prefix      = "172.16.0.0/16"
@@ -31,7 +31,8 @@ resource "azurerm_vpn_gateway" "hub01-vpn-gw" {
 
 resource "azurerm_vpn_server_configuration" "hub01-vpn-server" {
   name                = "${local.prefix-hub-01}-vpn-server"
-  resource_group_name = "${local.hub-01-resource-group}"
+ // resource_group_name = "${local.hub-01-resource-group}"
+  resource_group_name = azurerm_resource_group.vwan-rg.name
   location            = "${local.hub-01-location}"
   vpn_authentication_types = ["Certificate"]
 
@@ -69,11 +70,13 @@ Ee7Uc3UG2Y26NqlDyefU0otHIFE1Qz3BwELq9h//lE7rp3UHIzMeFdoqr8mmOc0K
 8QNbN1h6WzBle66Gx/D9S1ndysU36U7vsMEL6m4Kv6qral2PzDHBMiFAqSciAzw=
 EOF
   }
+  depends_on = [ azurerm_virtual_hub.hub-01]
 }
 
 resource "azurerm_point_to_site_vpn_gateway" "hub01-p2s-gw" {
  name                = "${local.prefix-hub-01}-p2s-gw"
-  resource_group_name = "${local.hub-01-resource-group}"
+  //resource_group_name = "${local.hub-01-resource-group}"
+  resource_group_name = azurerm_resource_group.vwan-rg.name
   location            = "${local.hub-01-location}"
   virtual_hub_id      = azurerm_virtual_hub.hub-01.id
   vpn_server_configuration_id = azurerm_vpn_server_configuration.hub01-vpn-server.id
@@ -85,12 +88,14 @@ resource "azurerm_point_to_site_vpn_gateway" "hub01-p2s-gw" {
      address_prefixes    = ["192.168.51.0/24"]
   }
   }
+  depends_on = [ azurerm_virtual_hub.hub-01,azurerm_vpn_server_configuration.hub01-vpn-server]
 }
 
 #
 # Connection
 # https://www.terraform.io/docs/providers/azurerm/r/virtual_hub_connection.html
 #
+
 resource "azurerm_virtual_hub_connection" "spoke1-conn" {
   name                      = "${local.prefix-hub-01}-spoke1-conn"
   virtual_hub_id            = azurerm_virtual_hub.hub-01.id
@@ -98,6 +103,7 @@ resource "azurerm_virtual_hub_connection" "spoke1-conn" {
   hub_to_vitual_network_traffic_allowed          = true
   vitual_network_to_hub_gateways_traffic_allowed = false
   internet_security_enabled                      = true
+    depends_on = [ azurerm_virtual_hub.hub-01]
 }
 
 resource "azurerm_virtual_hub_connection" "spoke2-conn" {
@@ -107,4 +113,5 @@ resource "azurerm_virtual_hub_connection" "spoke2-conn" {
   hub_to_vitual_network_traffic_allowed          = true
   vitual_network_to_hub_gateways_traffic_allowed = false
   internet_security_enabled                      = true
+    depends_on = [ azurerm_virtual_hub.hub-01]
 }

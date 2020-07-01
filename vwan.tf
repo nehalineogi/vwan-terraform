@@ -1,6 +1,6 @@
 locals {
   prefix-hub         = "vwan"
-  hub-location       = "EastUS"
+  hub-location       = "EastUS2"
   hub-resource-group = "vwan-rg" 
 }
 
