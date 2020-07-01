@@ -12,7 +12,8 @@
 
 
 
-This code sample will build the above architecture
+This code sample will build the above architecture. Detailed blog post here.
+[Nehali Neogi Blog - Azure Virtual WAN using terraform - URL](https://nehalineogi.blogspot.com/2020/06/Azure-Virtual-WAN-using-Terraform.html)
 
 ### Prerequisites
 
@@ -36,13 +37,25 @@ terraform destroy
 
 ## Running the tests
 
-End Users need to
 
-- Install the mydomain.com.pfx certificate in the local certificate store.
-- Download and install the VPN Client from Azure Portal
+> [!NOTE]
+> End Users need to follow the following steps:
 
-After the p2s client is connected:
+
+
+
+1. Make sure that the following certificates are in the correct location:
+
+- mydomain.com.pfx	Current User\Personal\Certificates
+- rootCA.crt	Local Computer\Trusted Root Certification Authorities
+
+
+2.  Download and install the VPN Client from Azure Portal.
+ ![alt text for image](images/vpn-client-download.JPG)
+
+3. After the p2s client is connected:
 ipconfig (should get an ip from the P2S subnets 192.168.51.0/24 or 192.168.52.0.24)
+
 
 ```
 ping 10.1.1.4
