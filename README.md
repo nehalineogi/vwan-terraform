@@ -1,5 +1,5 @@
 
-# Build Azure vWAN service using Terraform
+# Build Azure vWAN using Terraform
 
 
 
@@ -30,16 +30,15 @@ git clone the repository and run the following commands
 # setup
 terraform init
 terraform plan
-terraform apply
+terraform apply  (run this command twice if you run into dependency issue)
 # to cleanup
-terraform destroy
+terraform destroy (run this command twice if you run into dependency issue)
 ```
 
 ## Running the tests
 
 
-> [!NOTE]
-> End Users need to follow the following steps:
+> [!NOTE]End Users need to follow the following steps:
 
 
 
