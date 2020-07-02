@@ -1,5 +1,5 @@
 
-# Build Azure vWAN using Terraform
+# Build Azure Virtual WAN using Terraform
 
 
 
