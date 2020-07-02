@@ -45,6 +45,8 @@ terraform destroy (run this command twice if you run into dependency issue)
 
 1. Make sure that the following certificates are in the correct location:
 
+password to import the test certificate is : rootca
+
 - mydomain.com.pfx	Current User\Personal\Certificates
 - rootCA.crt	Local Computer\Trusted Root Certification Authorities
 
