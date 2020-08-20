@@ -99,19 +99,19 @@ resource "azurerm_virtual_hub_connection" "spoke3-conn" {
   name                      = "${local.prefix-hub-02}-spoke3-conn"
   virtual_hub_id            = azurerm_virtual_hub.hub-02.id
   remote_virtual_network_id = azurerm_virtual_network.spoke3-vnet.id
-  hub_to_vitual_network_traffic_allowed          = true
+  /*hub_to_vitual_network_traffic_allowed          = true
   vitual_network_to_hub_gateways_traffic_allowed = false
-  internet_security_enabled                      = true
-    depends_on = [ azurerm_virtual_hub.hub-02]
+  internet_security_enabled                      = true */
+    depends_on = [ azurerm_virtual_hub.hub-02,azurerm_point_to_site_vpn_gateway.hub02-p2s-gw] 
 }
 
 resource "azurerm_virtual_hub_connection" "spoke4-conn" {
   name                      = "${local.prefix-hub-02}-spoke4-conn"
   virtual_hub_id            = azurerm_virtual_hub.hub-02.id
   remote_virtual_network_id = azurerm_virtual_network.spoke4-vnet.id
-  hub_to_vitual_network_traffic_allowed          = true
+  /* hub_to_vitual_network_traffic_allowed          = true
   vitual_network_to_hub_gateways_traffic_allowed = false
-  internet_security_enabled                      = true
-    depends_on = [ azurerm_virtual_hub.hub-02]
+  internet_security_enabled                      = true */
+  depends_on = [ azurerm_virtual_hub.hub-02,azurerm_point_to_site_vpn_gateway.hub02-p2s-gw] 
 }
 
